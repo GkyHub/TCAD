@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2015.10.24)  15 AUG 2016 17:42
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2015.10.24)  15 AUG 2016 20:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -514,43 +514,42 @@ File: figure/hw_arch.eps Graphic file (type eps)
  <figure/hw_arch.eps>
 File: figure/pe.eps Graphic file (type eps)
 
-<figure/pe.eps>
-Underfull \hbox (badness 1983) in paragraph at lines 196--197
+<figure/pe.eps> [3]
+Underfull \hbox (badness 1983) in paragraph at lines 195--196
 []\OT1/ptm/b/n/10 External Mem-ory \OT1/ptm/m/n/10 For state-of-the-art CNN, On
 -chip
  []
 
-[3]
 File: figure/controller.eps Graphic file (type eps)
- <figure/controller.eps>
+<figure/controller.eps> [4]
 File: figure/alignment_result.eps Graphic file (type eps)
- <figure/alignment_result.eps> [4]
-Underfull \hbox (badness 1845) in paragraph at lines 320--320
+ <figure/alignment_result.eps>
+Underfull \hbox (badness 1845) in paragraph at lines 319--319
 []\OT1/ptm/m/n/10 TABLE III: |Per-for-mance com-par-i-son of Angel-Eye on
  []
 
 
-Underfull \hbox (badness 2689) in paragraph at lines 332--332
+Underfull \hbox (badness 2689) in paragraph at lines 331--331
 []\OT1/ptm/m/n/10 TABLE IV: |Per-for-mance com-par-i-son of Angel-Eye on
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--352
+Underfull \hbox (badness 10000) in paragraph at lines 350--351
 []\OT1/ptm/m/n/10 Yu Wang's work was sup-ported by 973 project
  []
 
 
-Underfull \hbox (badness 1721) in paragraph at lines 351--352
+Underfull \hbox (badness 1721) in paragraph at lines 350--351
 \OT1/ptm/m/n/10 2013CB329000, Na-tional Nat-u-ral Sci-ence Foun-da-tion of
  []
 
 
-Underfull \hbox (badness 1394) in paragraph at lines 351--352
+Underfull \hbox (badness 1394) in paragraph at lines 350--351
 \OT1/ptm/m/n/10 De-vel-op-ment of High-Caliber Tal-ents Project of Bei-jing
  []
 
 
-Underfull \hbox (badness 6961) in paragraph at lines 351--352
+Underfull \hbox (badness 6961) in paragraph at lines 350--351
 \OT1/ptm/m/n/10 and Ts-inghua Uni-ver-sity Ini-tia-tive Sci-en-tific Re-search
  []
 

@@ -88,7 +88,6 @@ In this paper, we extend our previous work\cite{qiu2016going} to a complete desi
 Our experiments on FPGA show that the proposed design flow delivers CNN acceleration with high energy efficiency. The rest of this paper is organized as follows. Section \ref{sec:prime} introduces the background of CNN. Related work is then discussed in Section \ref{sec:related_work}. Details of the flow is shown in Section \ref{sec:flow}. We show the experimental results in Section \ref{sec:experiment} and concludes this work in Section \ref{sec:conclusion}.
 
 
-
 \section{Preliminary of CNN} \label{sec:prime}
 A CNN consists of a set of \emph{layers}. As the name suggests, the most important layers in CNNs are the Conv layers. Besides, FC layers, Non-Linearity layers, and pooling layers (down-sampling layer) are also essential in CNN.
 
@@ -113,9 +112,9 @@ A CNN consists of a set of \emph{layers}. As the name suggests, the most importa
 
 \textbf{Conv layer} applies Conv operations on input feature maps and can extract high-level features from the inputs. An example is shown in Figure~\ref{fig:primer} (a), where the feature maps are blue and the 3-D Conv kernel is green. Each pixel of each output feature map is the inner product of a part of input with a 3-D convolution kernel.
 
-\textbf{FC layer} applies a linear transformation on the input feature vector. It is usually used as the classifier in the final stage of a CNN. A simple FC layer is shown in Figure~\ref{fig:primer} (b).
+\textbf{FC layer} applies a linear transformation on the input feature vector. It is usually used as the classifier in the final stage of a CNN. A simple FC layer with 4 input and 3 output is shown in Figure~\ref{fig:primer} (b) where each connection represents a weight of the model.
 
-\textbf{Non-linearity layer} helps increase the fitting ability of neural networks. In CNN, the Rectified Linear Unit (ReLU), as shown in Figure~\ref{fig:primer} (c), is the most frequently used function~\cite{krizhevsky2012imagenet}. Hyperbolic tangent function and sigmoid function are also used in various neural networks.
+\textbf{Non-linearity layer} helps increase the fitting ability of neural networks. In CNN, the Rectified Linear Unit (ReLU), as shown in Figure~\ref{fig:primer} (c), is the most frequently used function~\cite{krizhevsky2012imagenet}. Hyperbolic tangent function and sigmoid function are also adopted in various neural networks.
 
 \textbf{Pooling layer} is used for down-sampling. Average pooling and max pooling are two major types of pooling layers. For a pooling layer, it outputs the maximum or average value of each subarea in the input feature map. Pooling layer can not only reduce the feature map size and the computation for later layers, but also introduces translation invariance. A simple max pooling layer with a 2$\times$2 kernel is shown in Figure~\ref{fig:primer} (d).
 
@@ -124,7 +123,7 @@ A practical CNN for face alignment which we use for the verification of our desi
 \section{Related Work} \label{sec:related_work}
 Though many regions in machine learning benefits from neural network like algorithms, one of the main drawback it brings is the high computation complexity, especially for CNNs. Various accelerator designs for CNN have been proposed. In this section, some state-of-the-art CNNs are introduced first. Then we give an overview of existing CNN accelerators.
 
-\subsection{State-of-the-art CNN}
+\subsection{State-of-the-art CNN Model}
 State-of-the-art CNN models differ greatly from earlier network in topology. Recent work is focusing more on the design of Conv layers than on FC layers. As in VGG network~\cite{simonyan2014very}, 3 FC layers with more than 0.12 billion weights are used for the final classification. ResNet~\cite{he2015deep}, the winner of Image-Net Large-Scale Vision Recognition Challenge (ILSVRC) 2015, implements 152-layers where only the last layer is fully connected. Shortcut structure is also introduced in Conv layers to reinforce the learning ability. Network with no FC layer is also proposed~\cite{long2015fully}.
 
 Convolution kernels in CNN is also changing. Early CNN designs~\cite{krizhevsky2012imagenet}\cite{zeiler2014visualizing} adopted convolution kernels of size 11$\times$11 for Conv layers, which are much larger than the 3$\times$3 kernels in VGG networks~\cite{simonyan2014very} and the 1$\times$1 kernels in SqueezeNet~\cite{iandola2016squeezenet}.  It is a trend to use smaller kernels in Conv Layers. Computation complexity reduces while the network performance remains.
