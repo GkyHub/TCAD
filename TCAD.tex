@@ -42,7 +42,7 @@ Lingzhi Sui\IEEEauthorrefmark{2},
 Jiantao Qiu\IEEEauthorrefmark{1},
 Song Yao\IEEEauthorrefmark{2} and
 Song Han\IEEEauthorrefmark{3}}
-\IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Electrical Engineering\\
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Electronic Engineering\\
 Tsinghua University,
 Beijing, China\\
 Email: gky15@mails.tsinghua.edu.cn, yu-wang@tsinghua.edu.cn}
@@ -51,24 +51,36 @@ Email: gky15@mails.tsinghua.edu.cn, yu-wang@tsinghua.edu.cn}
 
 
 \maketitle
+
+%%==============================================================================
+%%  Abstract
+%%==============================================================================
 \begin{abstract}
 Convolutional Neural Network (CNN) has become a successful algorithm in the region of artificial intelligence and a strong candidate for many applications. However, for embedded platforms, CNN-based solutions are still too complex to be applied if only CPU is utilized for computation. Various dedicated hardware designs on FPGA and ASIC have been carried out to accelerate CNN, while few of them explore the whole design flow for both fast deployment and high power efficiency. In this paper, we propose Angel-Eye, a programmable and flexible CNN processor architecture, together with compilation tool and runtime environment. Evaluated on Zynq XC7Z045 platform, Angel-Eye is 8$\times$ faster and 7$\times$ better in power efficiency than peer FPGA implementation on the same platform. A demo of face detection on XC7Z020 is also 20$\times$ and 15$\times$ more energy efficient than counterparts on mobile CPU and mobile GPU respectively.
-
 \end{abstract}
 
-\section{Introduction}
-Convolutional Neural Network (CNN) is one of the state-of-the-art artificial intelligence algorithms. It outperforms traditional algorithms in regions like image classification and audio processing. But the high computation complexity limits its application region to the servers in the cloud. In other situations, the gap between the workload of CNN and the computation is too large to be covered by traditional CPU platform.
 
-Customized hardware is a promising solution, which requires hardware and software co-design. The network should be adjusted to a hardware friendly form. Recent work on CNN have shown that the data format can be compressed from 32-bit floating point to fixed point. This greatly reduces the power and area cost of the hardware. We have shown that 8-bit fixed point is enough for VGG network\cite{simonyan2014very}. Han et al.\cite{han2015learning} compressed the data to 4-bit by weight sharing. Recent work even tries 1-bit weight for classification\cite{Rastegari2016XNOR}.
+
+%%==============================================================================
+%%  Introduction
+%%==============================================================================
+\section{Introduction} \label{sec:intro}
+Convolutional Neural Network (CNN) is one of the state-of-the-art artificial intelligence algorithms. With a large model and enough training data set, CNN generates complex features for certain tasks, which outperforms traditional handcrafted features. Thus CNN can help achieve the top performance in regions like image classification, object detection and even stereo vision. Some audio algorithms also involves CNN as one of the feature extraction steps.
+
+Despite the outstanding performance, CNN is hard to be implemented in daily applications, because of its high computation complexity. Large CNN models can involve up to nearly 40G operations (multiplication or addition) \cite{simonyan2014very} for the inference of one 224$\times$224 image. Larger images in real applications can scale this number up. Thus this kind of applications are usually implemented as a cloud service on large servers. For personal devices, traditional CPU platforms are hardly able to handle CNN models with acceptable processing speed. For tasks like object detection where real-time processing is required, the situation is worse.
+
+GPU offers high degree of parallelization, thus is a good candidate for compute CNN. But usually a batch of images should be processed together to fully utilize the computation capacity. For video processing, this means larger latency for each frame. On the other hand, recent work have shown that the data precision in CNN processing can be reduced from 32-bit floating point to 16-bit fixed point or even less. This means it is possible to achieve better energy efficiency than GPU with customized hardware.
+
+Implementing customized hardware of CNN requires hardware and software co-design. The network should be adjusted to a hardware friendly form. Recent work on CNN have shown that the data format can be compressed from 32-bit floating point to fixed point. This greatly reduces the power and area cost of the hardware. We have shown that 8-bit fixed point is enough for VGG network\cite{simonyan2014very}. Han et al.\cite{han2015learning} compressed the data to 4-bit by weight sharing. Recent work even tries 1-bit weight for classification\cite{Rastegari2016XNOR}.
 
 On the hardware side, an architecture with high efficiency and high flexibility is needed. Zhang et al.\cite{zhang2015optimizing} proposed a floating point accelerator design on FPGA, where the loop unrolling parameter design space is explored for a certain network. But the situation for running different networks are not considered. ASIC design by Du et al.\cite{du2015shidiannao} consumes only 320mW power by a mesh grid design. However, it only supports CNNs with very limited model capacity due to on-chip memory constraint.
 
-Previous work mainly maps the software model to hardware structure manually. But the great variety of the topologies of state-of-the-art CNNs brings challenge to hardware designers. ResNet\cite{he2015deep}, which is the winner of Image-Net Large-Scale Vision Recognition Challenge (ILSVRC) 2016, implements a 152-layer model with shortcut layers. But the winner of 2015\cite{simonyan2014very} uses cascaded 19 layers in their network.
+Previous work mainly maps the software model to hardware structure manually. But the great variety of the topologies of state-of-the-art CNNs brings challenge to hardware designers. ResNet\cite{he2015deep}, which is the winner of Image-Net Large-Scale Vision Recognition Challenge (ILSVRC) 2016, implements a 152-layer model with shortcut layers. But the winner of 2015 \cite{simonyan2014very} uses cascaded 19 layers in their network.
 
 So a mapping tool is needed to bridge software model with hardware structure. One choice is to automatically generate the hardware code for a certain network. This pushes the hardware performance to the extreme while the flexibility to different networks is low. Another choice is to use a flexible hardware structure and leave the mapping work to software side, which is the choice of our work. This can response to the changes in network topology quickly, no matter the platform is FPGA or ASIC. It also supports different network switch at runtime.
 
 In this paper, we extend our previous work\cite{qiu2016going} to a complete design flow for mapping CNN onto customized hardware. Generally three parts are included in this flow:
-\begin{itemize} \itemsep = 0pt
+\begin{itemize} % \itemsep = 0pt
     \item A data quantization strategy to compress the original network to a fixed-point form.
     \item A parameterized and runtime configurable hardware architecture to support various networks and fit into various platforms.
     \item An instruction set together with a compiler that bridges different topologies of convolutional neural networks with the proposed hardware architecture.
@@ -77,7 +89,7 @@ Our experiments on FPGA show that the proposed design flow delivers CNN accelera
 
 
 
-\section{Preliminary of CNN}\label{sec:prime}
+\section{Preliminary of CNN} \label{sec:prime}
 A CNN consists of a set of \emph{layers}. As the name suggests, the most important layers in CNNs are the Conv layers. Besides, FC layers, Non-Linearity layers, and pooling layers (down-sampling layer) are also essential in CNN.
 
 \begin{figure*}[h]
