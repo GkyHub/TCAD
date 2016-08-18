@@ -125,6 +125,7 @@ Though many regions in machine learning benefits from neural network like algori
 
 \subsection{State-of-the-art CNN Model}
 State-of-the-art CNN models differ greatly from earlier network in topology. Recent work is focusing more on the design of Conv layers than on FC layers. As in VGG network~\cite{simonyan2014very}, 3 FC layers with more than 0.12 billion weights are used for the final classification. ResNet~\cite{he2015deep}, the winner of Image-Net Large-Scale Vision Recognition Challenge (ILSVRC) 2015, implements 152-layers where only the last layer is fully connected. Shortcut structure is also introduced in Conv layers to reinforce the learning ability. Network with no FC layer is also proposed~\cite{long2015fully}.
+One of the most successful applications for CNN is object detection. R-CNN extracts proposals with traditional CV algorithm and gives each one a category and confidence with a CNN. Fast-RCNN take the full image as the input of a CNN and extracts proposals on the output features to reduce redundant calculation. Faster-RCNN ... R-FCN ... 
 
 Convolution kernels in CNN is also changing. Early CNN designs~\cite{krizhevsky2012imagenet}\cite{zeiler2014visualizing} adopted convolution kernels of size 11$\times$11 for Conv layers, which are much larger than the 3$\times$3 kernels in VGG networks~\cite{simonyan2014very} and the 1$\times$1 kernels in SqueezeNet~\cite{iandola2016squeezenet}.  It is a trend to use smaller kernels in Conv Layers. Computation complexity reduces while the network performance remains.
 
